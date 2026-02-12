@@ -1,58 +1,687 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Your Name - Academic Homepage</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Azarakhsh Malekian — Professor of Operations Management and Statistics (Rotman School of Management) & Google Visiting Faculty Researcher." />
+  <title>Azarakhsh Malekian</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #f6f5f2;                 /* warm off-white */
+      --text: rgba(18,24,38,.95);    /* near-black */
+      --muted: rgba(18,24,38,.70);
+      --subtle: rgba(18,24,38,.55);
+      --border: rgba(18,24,38,.12);
+      --accent: #2563eb;             /* blue */
+      --accent2:#7c3aed;             /* violet */
+      --good:#059669;                /* green */
+      --shadow: 0 16px 40px rgba(2,6,23,.10);
+      --radius: 18px;
+      --max: 1100px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(900px 600px at 20% -10%, rgba(37,99,235,.10), transparent 60%),
+        radial-gradient(900px 600px at 90% 10%, rgba(124,58,237,.08), transparent 55%),
+        radial-gradient(700px 500px at 60% 110%, rgba(5,150,105,.06), transparent 60%),
+        var(--bg);
+      line-height:1.55;
+    }
+
+    a{ color:var(--accent); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+    .wrap{ max-width:var(--max); margin:0 auto; padding:26px 18px 60px; }
+
+    /* Top nav */
+    .nav{
+      position:sticky; top:0; z-index:30;
+      backdrop-filter: blur(10px);
+      background: rgba(246,245,242,.88);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-inner{
+      max-width:var(--max); margin:0 auto; padding:10px 18px;
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:700; letter-spacing:.2px;
+      color: var(--text);
+    }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 5px rgba(37,99,235,.10);
+    }
+    .nav-links{
+      display:flex; flex-wrap:wrap; gap:10px;
+      align-items:center;
+    }
+    .pill{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:8px 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background: rgba(255,255,255,.80);
+      color:var(--text);
+      font-size:14px;
+      text-decoration:none;
+    }
+    .pill:hover{ background: rgba(255,255,255,.95); text-decoration:none; }
+    .pill.primary{
+      border-color: rgba(37,99,235,.25);
+      background: rgba(37,99,235,.10);
+      color: var(--text);
+    }
+
+    /* Hero */
+    .hero{
+      padding:22px 0 12px;
+      display:grid;
+      grid-template-columns: 1.35fr .65fr;
+      gap:16px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){
+      .hero{ grid-template-columns:1fr; }
+    }
+
+    .card{
+      border:1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.82));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      color: var(--text);
+    }
+
+    .hero-main{ padding:22px; }
+    .kicker{ color:var(--muted); font-weight:600; font-size:14px; letter-spacing:.3px; }
+    h1{
+      margin:10px 0 8px;
+      font-size:44px;
+      line-height:1.08;
+      letter-spacing:-.8px;
+      color: var(--text);
+    }
+    @media (max-width: 520px){ h1{ font-size:34px; } }
+    .title{
+      color:var(--muted);
+      font-size:16px;
+      margin-bottom:14px;
+    }
+    .meta{
+      display:flex; flex-wrap:wrap; gap:10px; margin:14px 0 0;
+      color:var(--subtle);
+      font-size:14px;
+    }
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.75);
+      color:var(--muted);
+    }
+    .chip b{ color:var(--text); font-weight:600; }
+    .btnrow{ display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
+
+    .hero-side{ padding:18px; display:flex; flex-direction:column; gap:14px; }
+    .section-title{
+      margin:0;
+      font-size:14px;
+      color:var(--muted);
+      letter-spacing:.25px;
+      text-transform:uppercase;
+    }
+
+    /* Photo */
+    .profile{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:10px;
+      padding:18px;
+    }
+.avatar{
+  width:200px;     /* change size here */
+  height:200px;
+  border-radius:18px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  background:white;
+  box-shadow:var(--shadow);
+  flex-shrink:0;
+}
+
+
+.avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+
+    .avatar img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .photo-note{
+      color: var(--subtle);
+      font-size: 12px;
+      text-align:center;
+      max-width: 280px;
+    }
+
+    .chips{
+      display:flex; flex-wrap:wrap; gap:10px;
+    }
+    .tag{
+      padding:8px 10px;
+      border-radius:999px;
+      background: rgba(124,58,237,.10);
+      border:1px solid rgba(124,58,237,.22);
+      color: var(--text);
+      font-size:14px;
+      white-space:nowrap;
+    }
+    .tag:nth-child(2n){
+      background: rgba(37,99,235,.10);
+      border-color: rgba(37,99,235,.22);
+    }
+    .tag:nth-child(3n){
+      background: rgba(5,150,105,.10);
+      border-color: rgba(5,150,105,.20);
+    }
+
+    /* Content sections */
+    section{ margin-top:22px; }
+    .section-card{ padding:18px; }
+    .section-head{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+    h2{
+      margin:0;
+      font-size:22px;
+      letter-spacing:-.2px;
+      color: var(--text);
+    }
+    .hint{ color:var(--subtle); font-size:13px; }
+    .search{
+      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+    }
+    .search input{
+      width:min(520px, 100%);
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.85);
+      color:var(--text);
+      outline:none;
+    }
+    .search input::placeholder{ color: var(--subtle); }
+
+    /* Publication groups */
+    details{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.70);
+      border-radius:14px;
+      padding:10px 12px;
+      margin-top:10px;
+    }
+    summary{
+      cursor:pointer;
+      list-style:none;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      user-select:none;
+      color: var(--text);
+    }
+    summary::-webkit-details-marker{ display:none; }
+    .sum-left{ display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; }
+    .badge{
+      font-size:12px;
+      color: var(--text);
+      padding:4px 8px;
+      border-radius:999px;
+      background: rgba(37,99,235,.10);
+      border:1px solid rgba(37,99,235,.22);
+    }
+    .count{ color:var(--subtle); font-size:13px; }
+    ol, ul{ margin:10px 0 4px 22px; }
+    li{ margin:8px 0; color: var(--text); }
+    .pub a{ font-weight:600; }
+    .year{ color:var(--subtle); font-weight:500; }
+
+    /* Footer */
+    footer{
+      margin-top:34px;
+      color: var(--subtle);
+      font-size:13px;
+      text-align:center;
+    }
+    .small{ font-size:12px; color: var(--subtle); }
+  </style>
 </head>
+
 <body>
-    <header>
-        <h1>Your Name</h1>
-        <p>Academic Affiliation</p>
-        <!-- Add your photo here -->
-        <img src="azarakhsh_pic.jpg" alt="Your Photo">
-    </header>
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <span class="dot"></span>
+        <span>Azarakhsh Malekian</span>
+      </div>
+      <div class="nav-links">
+        <a class="pill" href="#about">About</a>
+        <a class="pill" href="#publications">Publications</a>
+        <a class="pill" href="#activities">Activities</a>
+        <a class="pill primary" href="https://scholar.google.ca/citations?user=Ew_nVXEAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener">Google Scholar</a>
+        <!-- Replace with your CV PDF link -->
+        <a class="pill" href="https://drive.google.com" target="_blank" rel="noopener">CV</a>
+      </div>
+    </div>
+  </div>
 
-    <section id="research-interests">
-        <h2>Research Interests</h2>
-        <ul>
-            <li>Research Interest 1</li>
-            <li>Research Interest 2</li>
-            <li>Research Interest 3</li>
-        </ul>
-    </section>
+  <div class="wrap">
 
+    <!-- HERO -->
+ <!-- HERO -->
+<div class="hero" id="about">
+  <div class="card hero-main">
+
+
+
+
+
+    <!-- NEW: photo + name row -->
+    <div style="display:flex; gap:18px; align-items:center; flex-wrap:wrap;">
+      <div class="avatar">
+        <img src="Azarakhsh.png" alt="Azarakhsh Malekian">
+      </div>
+
+      <div>
+        <div class="kicker">Professor • Rotman School of Management</div>
+        <h1 style="margin:6px 0 6px;">Azarakhsh Malekian</h1>
+        <div class="title">
+          Professor of Operations Management and Statistics • Google Visiting Faculty Researcher
+        </div>
+
+        <div class="meta">
+          <span class="chip"><b>Affiliation</b> Rotman School of Management</span>
+          <span class="chip"><b>Email</b> azarakhsh.malekian "at" rotman "dot" utoronto "dot" ca</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="btnrow" style="margin-top:16px;">
+      <a class="pill primary" href="https://scholar.google.ca/citations?user=Ew_nVXEAAAAJ&hl=en&oi=ao" target="_blank">Google Scholar</a>
+      <a class="pill" href="https://drive.google.com" target="_blank">CV</a>
+      <a class="pill" href="#publications">Jump to Publications</a>
+    </div>
+
+  </div>
+
+  <!-- RIGHT PANEL stays ONLY research interests now -->
+  <div class="card hero-side">
+    <p class="section-title">Research interests</p>
+    <div class="chips">
+      <span class="tag">Data Markets</span>
+      <span class="tag">Privacy</span>
+      <span class="tag">LLM Advertising</span>
+      <span class="tag">Network Economics</span>
+      <span class="tag">Mechanism Design</span>
+      <span class="tag">Game Theory</span>
+      <span class="tag">Combinatorial Optimization</span>
+      <span class="tag">Randomized Algorithms</span>
+    </div>
+  </div>
+</div>
+
+
+    <!-- PUBLICATIONS -->
     <section id="publications">
-        <h2>Publications</h2>
-        <ul>
-            <li><a href="#">Publication Title 1</a>, Author(s), Journal/Conference, Year</li>
-            <li><a href="#">Publication Title 2</a>, Author(s), Journal/Conference, Year</li>
-            <!-- Add more publications here -->
-        </ul>
+      <div class="card section-card">
+        <div class="section-head">
+          <div>
+            <h2>Publications</h2>
+            <div class="hint">Search filters across all lists below.</div>
+          </div>
+          <div class="search">
+            <input id="pubSearch" type="search" placeholder="Search: title, coauthor, venue, year…" autocomplete="off" />
+            <span class="hint" id="pubCount"></span>
+          </div>
+        </div>
+
+        <!-- Under review + working papers -->
+        <details open data-group="Under review and working papers">
+          <summary>
+            <div class="sum-left">
+              <span class="badge">Under review and working papers</span>
+              <span class="count"><span data-count></span> items</span>
+            </div>
+            <span class="hint">Click to collapse</span>
+          </summary>
+          <ol>
+            <li class="pub-item">
+              <span class="pub"><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6212838" target="_blank" rel="noopener">Dynamic Learning and Optimal Advertising Mechanism for LLM Platforms</a>, with S. Alaei and A. Makhdoumi,Working paper, <span class="year">2026</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6220718" target="_blank" rel="noopener">Optimal Mechanism Design with Post-Allocation Signal</a>, with S. Alaei, A. Daei Naby, and A. Makhdoumi, Working paper, <span class="year">2026</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5297868" target="_blank" rel="noopener">Incentivizing Data Collaboration: A Mechanism Design Approach</a>, with S. Alaei, A. Daei Naby, and A. Makhdoumi, Working paper, <span class="year">2025</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5146874" target="_blank" rel="noopener">Inspect or Guess: Mechanism Design with Unobservable Inspection</a>, with A. Daei Naby and S. Alaei, Extended abstract accepted at WINE, Working paper, <span class="year">2025</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4723813" target="_blank" rel="noopener">The Limits of Price Discrimination Under Privacy Constraints</a>, with A. Fallah, M. I. Jordan, A. Makhdoumi, Working paper, <span class="year">2024</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4727167" target="_blank" rel="noopener">On Three-Layer Data Markets</a>, with A. Fallah, M. I. Jordan, and A. Makhdoumi, R&amp;R Quantitative Economics, <span class="year">2025</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4333457" target="_blank" rel="noopener">How Good Are Privacy Guarantees? Platform Architecture and Violation of User Privacy</a>, with D. Acemoglu, A. Fallah, A. Makhdoumi, and A. Ozdaglar, Major Revision, Mathematics of Operations Research, <span class="year">2025</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4311351" target="_blank" rel="noopener">Bridging Central and Local Differential Privacy in Data Acquisition Mechanisms</a>, with A. Fallah, A. Makhdoumi, and A. Ozdaglar, Major Revision, Management Science, <span class="year">2024</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://arxiv.org/abs/1706.01131" target="_blank" rel="noopener">Strategic Dynamic Pricing with Network Externalities</a>, with A. Makhdoumi and A. Ozdaglar, Under Revision, Management Science, <span class="year">2020</span></span>
+            </li>
+          </ol>
+        </details>
+
+        <!-- Published papers -->
+        <details open data-group="Published papers">
+          <summary>
+            <div class="sum-left">
+              <span class="badge">Published papers</span>
+              <span class="count"><span data-count></span> items</span>
+            </div>
+            <span class="hint">Click to collapse</span>
+          </summary>
+          <ol>
+            <li class="pub-item">
+              <span class="pub"><a href="https://pubsonline.informs.org/doi/abs/10.1287/opre.2022.0024" target="_blank" rel="noopener">Revenue Maximization Under Unknown Private Values With Non-Obligatory Inspection</a>, with S. Alaei and A. Makhdoumi, Operations Research, <span class="year">2024</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://www.aeaweb.org/articles?id=10.1257/aeri.20230589" target="_blank" rel="noopener">When Big Data Enables Behavioral Manipulation</a>, with D. Acemoglu, A. Makhdoumi, A. Ozdaglar, AER: Insights, <span class="year">2025</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://pubsonline.informs.org/doi/abs/10.1287/opre.2020.0651" target="_blank" rel="noopener">Optimal Auction Design with Deferred Inspection and Reward</a>, with S. Alaei, A. Belloni, and A. Makhdoumi, Operations Research, <span class="year">2024</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://pubsonline.informs.org/doi/10.1287/opre.2022.0014" target="_blank" rel="noopener">Optimal and Differentially Private Data Acquisition: Central and Local Mechanisms</a>, with A. Fallah, A. Makhdoumi, and A. Ozdaglar, Operations Research, <span class="year">2024</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://pubsonline.informs.org/doi/abs/10.1287/opre.2023.2468" target="_blank" rel="noopener">Optimal Subscription Planning for Digital Goods</a>, with S. Alaei and A. Makhdoumi, Operations Research, <span class="year">2023</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://onlinelibrary.wiley.com/doi/full/10.3982/ECTA15847" target="_blank" rel="noopener">Learning From Reviews: The Selection Effect and the Speed of Learning</a>, with D. Acemoglu, A. Makhdoumi, and A. Ozdaglar, Econometrica, <span class="year">2022</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://pubsonline.informs.org/doi/abs/10.1287/opre.2022.2302" target="_blank" rel="noopener">Technical Note: Revenue Volatility under Uncertain Network Effects</a>, with O. Baron and M. Hu, Operations Research, <span class="year">2022</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://pubsonline.informs.org/doi/abs/10.1287/opre.2021.2230" target="_blank" rel="noopener">Revenue-Sharing Allocation Strategies for Two-Sided Media Platforms: Pro-Rata versus User-Centric</a>, with S. Alaei, A. Makhdoumi, and S. Pekec, Management Science, <span class="year">2022</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://pubsonline.informs.org/doi/abs/10.1287/opre.2021.2220" target="_blank" rel="noopener">Testing, Voluntary Social Distancing and the Spread of an Infection</a>, with D. Acemoglu, A. Makhdoumi, and A. Ozdaglar, Operations Research, <span class="year">2024</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2737748" target="_blank" rel="noopener">A Dynamic Model of Crowdfunding</a>, with S. Alaei and M. Mostagir, Operations Research, <span class="year">2021</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://www.aeaweb.org/articles?id=10.1257/mic.20200200" target="_blank" rel="noopener">Too Much Data: Prices and Inefficiencies in Data Markets</a>, with D. Acemoglu, A. Makhdoumi, and A. Ozdaglar, AEJ: Microeconomics, <span class="year">2022</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://pubsonline.informs.org/doi/abs/10.1287/mnsc.2020.3820" target="_blank" rel="noopener">Maximizing Sequence-Submodular Functions and its Application to Online Advertising</a>, with A. Makhdoumi and S. Alaei, Management Science, <span class="year">2021</span></span>
+            </li>
+
+            <li class="pub-item">
+              <span class="pub"><a href="https://pubsonline.informs.org/doi/abs/10.1287/moor.2018.0958" target="_blank" rel="noopener"></a>Efficient Computation of Optimal Auctions via Reduced-forms, with S. Alaei, H. Fu, N. Haghpanah, and J. Hartline, Mathematics of Operations Research, <span class="year">2019</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://pubsonline.informs.org/doi/abs/10.1287/opre.2017.1712" target="_blank" rel="noopener">Informational Braess’ Paradox: The Effect of Information on Traffic Congestion</a>, with D. Acemoglu, A. Makhdoumi, and A. Ozdaglar, Operations Research,<span class="year">2018</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://www.sciencedirect.com/science/article/abs/pii/S0899825617301343" target="_blank" rel="noopener">Privacy-Constrained Network Formation</a>, with D. Acemoglu, A. Makhdoumi, and A. Ozdaglar, Games and Economic Behavior, <span class="year">2017</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://www.sciencedirect.com/science/article/abs/pii/S0022053116300837" target="_blank" rel="noopener">Network Security and Contagion</a>, D. Acemoglu, A. Malekian, A. Ozdaglar. Journal of Economic Theory, <span class="year">2016</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://pubsonline.informs.org/doi/abs/10.1287/opre.2016.1509" target="_blank" rel="noopener">Competitive Equilibrium in Two Sided Matching Markets with General Utility Functions</a>, S. Alaei, K. Jain, A. Malekian. Operations Research,<span class="year">2016</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://www.sciencedirect.com/science/article/abs/pii/S0899825615000214" target="_blank" rel="noopener">Bayesian Incentive Compatibility via Matchings</a>, J. Hartline, R. Kleinberg, A. Malekian. Games and Economic Behavior, <span class="year">2016</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://dl.acm.org/doi/10.1145/1566374.1566402" target="_blank" rel="noopener">On Random Sampling Auctions for Digital Goods</a>, S. Alaei, A. Malekian, A. Srinivasan. ACM TEAC, 2(3), 2014.</span>
+            </li>
+            <li class="pub-item">
+              <span class="pub">Improved Algorithms for Data Migration, Y. Kim, S. Khuller, A. Malekian. Algorithmica 63(1–2), 347–362.</span>
+            </li>
+            <li class="pub-item">
+              <span class="pub">Energy Efficient Monitoring in Sensor Networks, A. Deshpande, S. Khuller, A. Malekian, M. Toossi. Algorithmica, <span class="year">2011</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub">To Fill or Not to Fill: The Gas Station Problem, S. Khuller, A. Malekian, J. Mestre. ACM TALG, <span class="year">2011</span></span>
+            </li>
+          </ol>
+        </details>
+
+        <!-- Refereed Conference Papers -->
+        <details data-group="Refereed Conference Papers">
+          <summary>
+            <div class="sum-left">
+              <span class="badge">Refereed conference papers</span>
+              <span class="count"><span data-count></span> items</span>
+            </div>
+            <span class="hint">Click to expand</span>
+          </summary>
+          <ol>
+            <li class="pub-item">
+              <span class="pub"><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=0" target="_blank" rel="noopener">Inspect or Guess: Mechanism Design with Unobservable Inspection</a>, with Ali Daeinabi and Saeed Alaei, WINE (extended abstract), <span class="year">2025</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub">Deterministic Refund Mechanisms, with Saeed Alaei, Shuchi Chawla, Zhiyi Huang, Ali Makhdoumi, SAGT, <span class="year">2025</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=0" target="_blank" rel="noopener">How Good Are Privacy Guarantees? Platform Architecture and Violation of User Privacy</a>, WINE (extended abstract), <span class="year">2023</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub">Bridging Central and Local Differential Privacy in Data Acquisition Mechanisms, NeurIPS, <span class="year">2022</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://arxiv.org/abs/2201.03968" target="_blank" rel="noopener">Optimal and Differentially Private Data Acquisition: Central and Local Mechanisms</a>, EC, <span class="year">2022</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://arxiv.org/pdf/2203.01384.pdf" target="_blank" rel="noopener">Descending Price Auctions with Bounded Number of Price Levels and Batched Prophet Inequality</a>, EC, <span class="year">2022</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3855810" target="_blank" rel="noopener"></a> Revenue Maximization Under Unknown Private Values With Non-Obligatory Inspection, EC (as “Revenue Maximizing Pandora Problem”), <span class="year">2021</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://dl.acm.org/citation.cfm?id=2940777" target="_blank" rel="noopener">A Dynamic Model of Crowdfunding</a>, EC, <span class="year">2016</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub">Competitive Equilibrium in Electricity Markets with Heterogeneous Users and Price Fluctuation Penalty, with A. Ozdaglar, E. Wei, CDC, <span class="year">2014</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://ieeexplore.ieee.org/document/7040401" target="_blank" rel="noopener"></a>Competitive Equilibrium in Electricity Markets with Heterogeneous Users and Ramping Constraints, with A. Ozdaglar, E. Wei, Allerton (invited), <span class="year">2013</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub">Bayesian Optimal Auctions via Multi- to Single-agent Reduction</a>, EC, <span class="year">2012</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://dl.acm.org/citation.cfm?id=1993613" target="_blank" rel="noopener">Bayesian Mechanism Design for Budget-Constrained Agents</a>, EC, <span class="year">2011</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://epubs.siam.org/doi/abs/10.1137/1.9781611973082.58" target="_blank" rel="noopener">Bayesian Algorithmic Mechanism Design: Multi Dimensional Setting</a>, SODA, <span class="year">2011</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://link.springer.com/chapter/10.1007/978-3-642-17572-5_8" target="_blank" rel="noopener">A Novel Approach for Propagating Distrust</a>, WINE, <span class="year">2010</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://dl.acm.org/citation.cfm?doid=1835804.1835872" target="_blank" rel="noopener">Balanced Allocation with Succinct Representation</a>, KDD, <span class="year">2010</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://link.springer.com/chapter/10.1007/978-3-642-10841-9_36" target="_blank" rel="noopener">An analysis of Troubled Assets Reverse Auction</a>, WINE, <span class="year">2009</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://dl.acm.org/citation.cfm?id=1592758" target="_blank" rel="noopener">Online Allocation of Display Advertisements subject to Advanced Sales Contracts</a>, ADKDD, <span class="year">2009</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://dl.acm.org/citation.cfm?id=1566402" target="_blank" rel="noopener">On Random Sampling Auctions for Digital Goods</a>, EC, <span class="year">2009</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://dl.acm.org/citation.cfm?id=1386793" target="_blank" rel="noopener">Query Rewrites for Keyword-based Advertising</a>, ACM EC, <span class="year">2008</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"><a href="https://link.springer.com/chapter/10.1007/978-3-540-78773-0_38" target="_blank" rel="noopener">Energy Efficient Monitoring in Sensor Networks</a>, LATIN, <span class="year">2008</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"> To Fill or not to Fill: The Gas Station Problem</a>, ESA, <span class="year">2007</span></span>
+            </li>
+            <li class="pub-item">
+              <span class="pub"> Improved Algorithms for Data Migration</a>, APPROX, <span class="year">2006</span></span>
+            </li>
+          </ol>
+        </details>
+
+        <!-- Patents -->
+        <details data-group="Patents">
+          <summary>
+            <div class="sum-left">
+              <span class="badge">Patents</span>
+              <span class="count"><span data-count></span> items</span>
+            </div>
+            <span class="hint">Click to expand</span>
+          </summary>
+          <ol>
+            <li class="pub-item">
+              <span class="pub">Optimizing Query Rewrites for Keyword-based Advertising, With C. Chao Chang, R. Kumar, G. Wang, Document Number: #20090216710.</span>
+            </li>
+            <li class="pub-item">
+              <span class="pub">A Novel Approach for Propagating Distrust, With C. Borgs, J. Chayes, A. Kalai, M. Tennenholtz, Publication number: #US 2011/0252121 A1</span>
+            </li>
+          </ol>
+        </details>
+
+        <div class="hint" style="margin-top:12px;">
+        </div>
+      </div>
     </section>
 
-    <section id="research-projects">
-        <h2>Research Projects</h2>
-        <ul>
-            <li><a href="#">Project Title 1</a>, Project Description</li>
-            <li><a href="#">Project Title 2</a>, Project Description</li>
-            <!-- Add more research projects here -->
-        </ul>
-    </section>
+    <!-- ACTIVITIES -->
+    <section id="activities">
+      <div class="card section-card">
+        <div class="section-head">
+          <div>
+            <h2>Activities</h2>
+            <div class="hint">Service, editorial roles, committees, and refereeing.</div>
+          </div>
+        </div>
 
-    <section id="education">
-        <h2>Education</h2>
         <ul>
-            <li>Degree, Major, Institution, Graduation Year</li>
-            <li>Degree, Major, Institution, Graduation Year</li>
-            <!-- Add more education details here -->
+          <li>Associate Editor, Management Science (Revenue Management and Market Analytics).</li>
+          <li>Associate Editor, Operations Research (Revenue Management and Market Analytics).</li>
+            <li>Track chair at The Web Conference 2023 (Economics and Monetization track).</li>
+            <li>Chair of 2025 Lanchester Prize Committee</li>
+          <li>Conference Co-Chair, The 18th conference on Web and Internet Economics (WINE) 2022, Troy, NY, USA.</li>
+          <li>Cluster Co-chair: Mechanism Design and Game Theory, INFORMS International Conference, Hawaii, 2016.</li>
+          <li>Co-Chair, George Dantzig Dissertation Award, 2022.</li>
+          <li>Co-organizer, Marketplace Innovation Workshop, 2023.</li>
+          <li>Area Chair: 23rd ACM Conference on Economics and Computation (EC), 2022.</li>
+          <li>Senior Program Committee: Several times for ACM Conference on Economics and Computation (EC).</li>
         </ul>
+
+        <h3 style="margin:16px 0 8px; font-size:16px; color: var(--text);">Committee member</h3>
+        <ul>
+          <li>2023 and 2024 Lanchester Prize</li>
+          <li>George Dantzig Dissertation Award Committee, 2021</li>
+          <li>Conference and Economics Computation (EC), Several times</li>
+          <li>The Web Conference (WWW), Several times</li>
+          <li>AAAI, Several times</li>
+          <li>WINE, Several times</li>
+          <li>ADT, 2019 (Fuqua School of Business, Duke University)</li>
+          <li>Ad-Auctions Workshop, 2015 (Oregon); 2012 (Spain)</li>
+          <li>Workshop on Bayesian Mechanism Design, 2011 (Stanford, CA)</li>
+          <li>Workshop on the Economics of Web Search and Social Networks, 2013 (Italy)</li>
+        </ul>
+
+        <h3 style="margin:16px 0 8px; font-size:16px; color: var(--text);">Refereeing</h3>
+        <p style="margin:0; color: var(--muted);">
+          Journals: Operations Research, Management Science, MSOM, Mathematics of Operations Research, Econometrica,
+          Review of Economic Studies, JPE, AEJ: Microeconomics, Theoretical Economics, JET, GEB, OR Letters,
+          Networks, Review of Industrial Organization, ACM TEAC, Algorithmica.
+          <br />
+          Conferences: MSOM Service SIG, EC, STOC, SODA, WINE, WWW, APPROX, ESA, LATIN, SAGT, ICALP.
+        </p>
+      </div>
     </section>
 
     <footer>
-        <p>Contact: your.email@example.com</p>
-        <p>Follow me on <a href="https://www.linkedin.com/in/your-profile/">LinkedIn</a></p>
+      <div>© <span id="year"></span> Azarakhsh Malekian</div>
+      <div class="small">Built as a single-file site (HTML + CSS + tiny JS). Easy to host on GitHub Pages.</div>
     </footer>
+  </div>
+
+  <script>
+    // Year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Count items per details group
+    document.querySelectorAll("details").forEach(d => {
+      const count = d.querySelectorAll(".pub-item").length;
+      const target = d.querySelector("[data-count]");
+      if (target) target.textContent = count;
+    });
+
+    // Simple publication search (filters all .pub-item across all groups)
+    const input = document.getElementById("pubSearch");
+    const items = Array.from(document.querySelectorAll(".pub-item"));
+    const pubCount = document.getElementById("pubCount");
+
+    function updateCount() {
+      const visible = items.filter(li => li.style.display !== "none").length;
+      pubCount.textContent = `${visible} shown`;
+    }
+
+    function normalize(s){ return (s || "").toLowerCase().trim(); }
+
+    input?.addEventListener("input", () => {
+      const q = normalize(input.value);
+      items.forEach(li => {
+        const text = normalize(li.textContent);
+        li.style.display = (!q || text.includes(q)) ? "" : "none";
+      });
+
+      // Hide/show entire groups if everything inside is filtered out
+      document.querySelectorAll("details").forEach(d => {
+        const visibleInGroup = Array.from(d.querySelectorAll(".pub-item"))
+          .some(li => li.style.display !== "none");
+        d.style.display = visibleInGroup ? "" : "none";
+      });
+
+      updateCount();
+    });
+
+    updateCount();
+  </script>
 </body>
 </html>
